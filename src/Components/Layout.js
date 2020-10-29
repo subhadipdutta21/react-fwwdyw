@@ -5,12 +5,7 @@ const Layout = props => {
   return (
     <AntLayout
       className="site-layout"
-      style={{
-        alignItems: "center",
-        height: "100vh",
-        overflow: "auto",
-        paddingTop: 40
-      }}
+      style={{ alignItems: "center", height: "100vh", overflow: "auto", paddingTop: 40 }}
     >
       {props.children}
     </AntLayout>

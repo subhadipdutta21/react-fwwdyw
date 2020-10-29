@@ -1,8 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "antd";
+import TableFilter from "./TableFilter";
 
-const ProTable = ({dataSource}) => {
- 
+const ProTable = ({ }) => {
+
+  const [data, setData] = useState([
+    {
+      key: "1",
+      name: "Mike",
+      screenName: "mike",
+      followersCount: 25,
+      followingCount: 24,
+      location: "10 Downing Street",
+      verified: "true"
+    },
+    {
+      key: "2",
+      name: "Subh",
+      screenName: "subh",
+      followersCount: 124,
+      followingCount: 125,
+      location: "10 Downing Street",
+      verified: "true"
+    },
+    {
+      key: "3",
+      name: "Subh",
+      screenName: "subh",
+      followersCount: 32,
+      followingCount: 72,
+      location: "10 Downing Street",
+      verified: "true"
+    },
+    {
+      key: "4",
+      name: "Mike",
+      screenName: "mike",
+      followersCount: 38,
+      followingCount: 33,
+      location: "10 Downing Street",
+      verified: "true"
+    },
+    {
+      key: "5",
+      name: "Anne",
+      screenName: "anne",
+      followersCount: 65,
+      followingCount: 45,
+      location: "10 Downing Street",
+      verified: "true"
+    },
+    {
+      key: "6",
+      name: "Anne",
+      screenName: "anne",
+      followersCount: 32,
+      followingCount: 45,
+      location: "10 Downing Street",
+      verified: "true"
+    }
+  ]);
+
+  const [filteredData, setFilteredData] = useState(data)
 
   const columns = [
     {
@@ -37,8 +96,12 @@ const ProTable = ({dataSource}) => {
     }
   ];
 
+  const commonChildProps = { filteredData, setFilteredData, data, setData }
   return (
-    <Table style={{ width: "60%" }} dataSource={dataSource} columns={columns} />
+    <>
+      <TableFilter {...commonChildProps} />
+      <Table style={{ width: "60%", paddingTop: 40 }} dataSource={filteredData} columns={columns} />
+    </>
   );
 };
 
