@@ -29,8 +29,8 @@ const ProTable = ({ }) => {
       screenName: "subh",
       followersCount: 32,
       followingCount: 72,
-      location: "10 Downing Street",
-      verified: "true"
+      location: "Koramangala 1st block",
+      verified: "false"
     },
     {
       key: "4",
@@ -38,8 +38,8 @@ const ProTable = ({ }) => {
       screenName: "mike",
       followersCount: 38,
       followingCount: 33,
-      location: "10 Downing Street",
-      verified: "true"
+      location: "Koramangala 1st block",
+      verified: "false"
     },
     {
       key: "5",
@@ -47,8 +47,8 @@ const ProTable = ({ }) => {
       screenName: "anne",
       followersCount: 65,
       followingCount: 45,
-      location: "10 Downing Street",
-      verified: "true"
+      location: "HSR layout",
+      verified: "false"
     },
     {
       key: "6",
@@ -56,7 +56,7 @@ const ProTable = ({ }) => {
       screenName: "anne",
       followersCount: 32,
       followingCount: 45,
-      location: "10 Downing Street",
+      location: "HSR layout",
       verified: "true"
     }
   ]);
@@ -100,7 +100,7 @@ const ProTable = ({ }) => {
   return (
     <>
       <TableFilter {...commonChildProps} />
-      <Table style={{ width: "60%", paddingTop: 40 }} dataSource={filteredData} columns={columns} />
+      <Table style={{ width: "60%", paddingTop: 40 }} dataSource={filteredData} filteredData={filteredData} columns={columns} />
     </>
   );
 };

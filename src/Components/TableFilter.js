@@ -6,13 +6,13 @@ const { Option } = Select;
 const { Title } = Typography;
 
 
-const TableFilter = ({ data, setData, setFilteredData }) => {
+const TableFilter = ({ data, setData, setFilteredData, filteredData }) => {
 
   const columnVals = [
     { name: "Name" },
-    { screen_name: "Screen Name" },
-    { followers_count: "Followers Count" },
-    { following_count: "Following Count" },
+    { screenName: "Screen Name" },
+    { followersCount: "Followers Count" },
+    { followingCount: "Following Count" },
     { location: "Location" },
     { verified: "Verified" }
   ];
@@ -36,9 +36,9 @@ const TableFilter = ({ data, setData, setFilteredData }) => {
   useEffect(() => {
     console.log(totalRows)
     let alldata = data
-    let filteredData = QueryBuilder(alldata, totalRows)
-    console.log(filteredData, totalRows)    
-    setFilteredData(filteredData)
+    let tempfilteredData = QueryBuilder( alldata, totalRows)
+    console.log(tempfilteredData, totalRows)
+    setFilteredData(tempfilteredData)
   }, [totalRows])
 
   const checkIfPrevEmptyAndCreateNew = rowIdx => {
@@ -69,7 +69,6 @@ const TableFilter = ({ data, setData, setFilteredData }) => {
     switch (fieldName) {
       case "id":
         return false
-        break;
 
       case "operator":
         if (totalRows[idx].id === "") return true
@@ -171,7 +170,7 @@ const TableFilter = ({ data, setData, setFilteredData }) => {
       <Row justify='end'>
         <Col span={24}>
           <Title level={5}>
-            showing 12444 records
+            showing {filteredData.length} records
         </Title>
         </Col>
       </Row>
