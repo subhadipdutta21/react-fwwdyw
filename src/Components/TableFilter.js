@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Card, Select, Input, Row, Col, message, Typography } from "antd";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { Card, Col, Input, message, Row, Select, Typography } from "antd";
+import React, { useEffect, useState } from "react";
 import { QueryBuilder } from "../Helper";
 const { Option } = Select;
 const { Title } = Typography;
@@ -32,18 +32,15 @@ const TableFilter = ({ data, setData, setFilteredData, filteredData }) => {
 
   const [totalRows, setTotalRows] = useState([])
 
-
+  // initiating filter for any query change
   useEffect(() => {
-    console.log(totalRows)
     let alldata = data
-    let tempfilteredData = QueryBuilder( alldata, totalRows)
-    console.log(tempfilteredData, totalRows)
+    let tempfilteredData = QueryBuilder(alldata, totalRows)
     setFilteredData(tempfilteredData)
   }, [totalRows])
 
+  // adding new query rows
   const checkIfPrevEmptyAndCreateNew = rowIdx => {
-    console.log(rowIdx)
-    console.log(totalRows[rowIdx])
     let prevRow = totalRows[rowIdx]
     if (prevRow.id === "" || prevRow.operator === "" || prevRow.value === "") {
       message.error("Please fill Up all the previus values before adding new!")
@@ -52,19 +49,19 @@ const TableFilter = ({ data, setData, setFilteredData, filteredData }) => {
 
     let temp = [...totalRows]
     temp.push(queryFormat)
-    console.log(temp)
     setTotalRows(temp)
 
   }
 
+  // building the query
   const setQueryData = (idx, name, val) => {
-    console.log(idx, name, val)
     let temp = [...totalRows]
     temp[idx][name] = val
 
     setTotalRows(temp)
   }
 
+  // rules for disabling the fields of query input
   const disableRule = (idx, fieldName) => {
     switch (fieldName) {
       case "id":
@@ -150,9 +147,7 @@ const TableFilter = ({ data, setData, setFilteredData, filteredData }) => {
                 <Col span={4}>
                   <DeleteOutlined
                     onClick={() => {
-                      console.log('remove ', rowIdx)
                       let temp = totalRows.filter((itm, idx) => idx !== rowIdx)
-                      console.log(temp)
                       setTotalRows(temp)
                     }} />
                 </Col>

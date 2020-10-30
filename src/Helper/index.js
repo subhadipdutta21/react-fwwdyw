@@ -1,8 +1,5 @@
-import { message } from "antd"
 
 export const QueryBuilder = (data, query) => {
-
-    console.log(data, query)
 
     // Specifed which column names support which all operations
     let columnNamesWithSupportedOperations = {
@@ -20,16 +17,14 @@ export const QueryBuilder = (data, query) => {
     query.map(queryItm => {
 
         if (queryItm.value !== "" && columnNamesWithSupportedOperations?.[queryItm.id]?.includes(queryItm?.operator)) {
-            console.log('operation supported!', queryItm)
             if (queryItm.operator === 'EQ' || queryItm.operator === 'CONTAINS') {
-                console.log(queryItm.id)
                 queryItm.id.toLowerCase().search('count') >= 0 ?
                     temp = temp.length > 0 ? temp.filter(dataItm => dataItm?.[queryItm.id] === parseInt(queryItm?.value))
                         : data.filter(dataItm => dataItm?.[queryItm.id] === parseInt(queryItm?.value))
                     :
                     temp = temp.length > 0 ? temp.filter(dataItm => dataItm?.[queryItm.id]?.toLowerCase()?.startsWith(queryItm?.value?.toLowerCase()))
                         : data.filter(dataItm => dataItm?.[queryItm.id]?.toLowerCase()?.startsWith(queryItm?.value?.toLowerCase()))
-                console.log('result__', temp)
+
             } else if (queryItm.operator === 'GTE') {
                 temp.length > 0 ? temp = temp.filter(itm => itm[queryItm.id] >= parseInt(queryItm?.value))
                     : temp = data.filter(itm => itm.followingCount >= parseInt(queryItm?.value))
@@ -38,10 +33,10 @@ export const QueryBuilder = (data, query) => {
                     : temp = data.filter(itm => itm.followingCount <= parseInt(queryItm?.value))
             }
 
-        } else { console.log('unsupportd operation') }
+        } else { console.log('incomplete or query unsupportd operation!') }
     })
-    console.log('temp before sending__', temp)
 
+    // return data
     if (temp.length > 0) return temp
     else if (temp.length === 0 && query.length === 0) return data
     else if (temp.length === 0 && query.length > 0 && query[0]?.id !== "" && query[0]?.operator !== "") return temp

@@ -1,9 +1,8 @@
-import React from "react";
-import "./style.css";
-import ProTable from "./Components/ProTable";
-import TableFilter from "./Components/TableFilter";
-import Layout from "./Components/Layout";
 import "antd/dist/antd.css";
+import React from "react";
+import Layout from "./Components/Layout";
+import ProTable from "./Components/ProTable";
+import "./style.css";
 
 
 

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
 import { Table } from "antd";
+import React, { useState } from "react";
 import TableFilter from "./TableFilter";
 
 const ProTable = ({ }) => {
 
+  // dummy data
   const [data, setData] = useState([
     {
       key: "1",
@@ -99,7 +100,9 @@ const ProTable = ({ }) => {
   const commonChildProps = { filteredData, setFilteredData, data, setData }
   return (
     <>
-      <TableFilter {...commonChildProps} />
+      {/* filter component */}
+      <TableFilter {...commonChildProps} />  
+      {/* table component */}
       <Table style={{ width: "60%", paddingTop: 40 }} dataSource={filteredData} filteredData={filteredData} columns={columns} />
     </>
   );
